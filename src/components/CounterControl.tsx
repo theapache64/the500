@@ -28,7 +28,8 @@ const styles = StyleSheet.create({
 });
 export class CounterControl extends Component<Props>{
 
-  timers: number[] = [];
+  timer = 0;
+  isAlreadyPressed = false;
   tooMuchTimer = 0;
 
   render() {
@@ -52,33 +53,37 @@ export class CounterControl extends Component<Props>{
 
   private onControlPressedIn = () => {
 
-    console.log('PressedIn');
+    if (!this.isAlreadyPressed) {
 
-    /* const { type } = this.props;
+      this.isAlreadyPressed = true;
 
-    // Default press
-    this.props.onControlPressed(type);
+      const { type } = this.props;
 
-    // Long press
-    this.timer = setInterval(
-      () => {
-        this.props.onControlPressed(type);
-      },
-      100);
+      // Default press
+      this.props.onControlPressed(type);
 
-    this.tooMuchTimer = setTimeout(
-      () => {
-        this.props.onTooMuchPressedIn(type);
-      },
-      2000
-    ); */
+      // Long press
+      this.timer = setInterval(
+        () => {
+          this.props.onControlPressed(type);
+        },
+        50
+      );
+
+      this.tooMuchTimer = setTimeout(
+        () => {
+          this.props.onTooMuchPressedIn(type);
+        },
+        2000
+      );
+    }
   }
 
   private onControlPressedOut = () => {
 
-    console.log('PressedOut');
+    this.isAlreadyPressed = false;
 
-    /* clearInterval(this.timer);
-    clearTimeout(this.tooMuchTimer); */
+    clearInterval(this.timer);
+    clearTimeout(this.tooMuchTimer);
   }
 }
