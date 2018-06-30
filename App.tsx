@@ -19,7 +19,7 @@ import { CounterControl, CounterControlType } from './src/components/CounterCont
 import { RandomNumber } from './src/utils/RandomNumber';
 import { GameConfig } from './src/GameConfig';
 
-enum GameStates {
+export enum GameStates {
   'start', 'end', 'pause',
 }
 
@@ -35,7 +35,7 @@ export class App extends Component<Props, States> {
   startRandomGameStateChanger(timeout?: number): any {
 
     setTimeout(
-      
+
       () => {
         // Recursion
         let newState!: GameStates;
@@ -63,8 +63,13 @@ export class App extends Component<Props, States> {
             gameState: newState,
           },
           () => {
-            this.startRandomGameStateChanger();
-          });
+            this.startRandomGameStateChanger(
+              // If it's end, watchfor tooMuchHold
+              this.state.gameState === GameStates.end && GameConfig.tooMuchHoldTimeout
+            );
+          }
+        );
+
       },
       timeout ? timeout : RandomNumber.getBetween(GameConfig.minTimeout, GameConfig.maxTimeout)
     );
@@ -84,9 +89,13 @@ export class App extends Component<Props, States> {
     this.startRandomGameStateChanger();
   }
 
+  getBgColor = () => (
+    { backgroundColor: GameConfig.getBackgroundColor(this.state.gameState) }
+  )
+
   render() {
     return (
-      <View style={[styles.container, { backgroundColor: this.getBackgroundColor() }]}>
+      <View style={[styles.container, this.getBgColor()]}>
         <CounterControl
           onTooMuchPressedIn={this.onTooMuchPressed}
           onControlPressed={this.onControlPressed}
@@ -101,26 +110,6 @@ export class App extends Component<Props, States> {
       </View>
     );
   }
-
-  private getBackgroundColor = (): string => {
-
-    switch (this.state.gameState) {
-
-      case GameStates.start:
-        return GameConfig.color.startColor;
-
-      case GameStates.end:
-        return GameConfig.color.endColor;
-
-      case GameStates.pause:
-        return GameConfig.color.pauseColor;
-
-      default:
-        throw new Error(`Undefined game state ${this.state.gameState}`);
-    }
-
-  }
-
   private onControlPressed = (type: CounterControlType) => {
 
     Vibration.vibrate(100, false);

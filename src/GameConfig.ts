@@ -1,4 +1,24 @@
+import { GameStates } from '../App';
+
 export class GameConfig {
+  static getBackgroundColor = (gameState: GameStates): string => {
+
+    switch (gameState) {
+
+      case GameStates.start:
+        return GameConfig.color.startColor;
+
+      case GameStates.end:
+        return GameConfig.color.endColor;
+
+      case GameStates.pause:
+        return GameConfig.color.pauseColor;
+
+      default:
+        throw new Error(`Undefined game state ${gameState}`);
+    }
+
+  }
 
   // Colors
   static readonly color = class {
@@ -12,7 +32,8 @@ export class GameConfig {
     static readonly endColorDark = '#B71C1C';
   };
 
-  static minTimeout: 1000;
-  static maxTimeout: 3000;
+  static minTimeout: number = 1000;
+  static maxTimeout: number = 3000;
+  static tooMuchHoldTimeout: number = 1500;
 
 }
