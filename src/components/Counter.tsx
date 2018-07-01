@@ -4,6 +4,7 @@ import { StyleSheet } from './StyleSheet';
 
 interface Props extends TextProps {
   count: number;
+  flip: number;
 }
 
 const styles = StyleSheet.create({
@@ -21,8 +22,15 @@ export class Counter extends Component<Props>{
 
     const { style, ...otherProps } = this.props;
 
+    const flipStyle = { transform: [{ rotate: `${this.props.flip}deg` }] };
+
     return (
-      <Text style={[styles.tCount, style]} {...otherProps}>{this.props.count}</Text>
+      <Text
+        style={[styles.tCount, style, flipStyle]}
+        {...otherProps}
+      >
+        {this.props.count}
+      </Text>
     );
   }
 }
