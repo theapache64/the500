@@ -13,6 +13,7 @@ import { Counter } from '../components/Counter';
 import { CounterControl, CounterControlType } from '../components/CounterControl';
 import { GameConfig } from '../GameConfig';
 import { RandomNumber } from '../utils/RandomNumber';
+import { GameResult } from '../components/Result';
 
 export enum GameStates {
   'start', 'end', 'pause',
@@ -127,14 +128,49 @@ export class GameScreen extends Component<Props, States> {
       </View>
     );
   }
-  private onControlPressed = (type: CounterControlType) => {
+  private onControlPressed = (type: CounterControlType, isHolding: boolean) => {
 
-    Vibration.vibrate(100, false);
+    const { gameState } = this.state;
 
-    this.setState(prevState => ({
-      scoreFlip: type === CounterControlType.add ? 0 : 180,
-      count: type === CounterControlType.add ? prevState.count + 1 : prevState.count - 1,
-    }));
+    if (gameState !== GameStates.pause) {
+      // Green or red
+      Vibration.vibrate(100, false);
+
+      this.setState(
+        prevState => ({
+          scoreFlip: type === CounterControlType.add ? 0 : 180,
+          count: type === CounterControlType.add ? prevState.count + 1 : prevState.count - 1,
+        }),
+        () => {
+          // Checking count 
+          const { count } = this.state;
+
+          if (count >= GameConfig.upperCount || count <= GameConfig.lowerCount) {
+            // Limit reached
+            this.props.navigation.replace('ResultScreen', {
+
+              playerOneResult: count <= GameConfig.lowerCount
+                ? GameResult.WINNER
+                : GameResult.LOOSER,
+
+              playerTwoResult: count >= GameConfig.upperCount
+                ? GameResult.WINNER
+                : GameResult.LOOSER,
+
+            });
+          }
+
+        }
+      );
+    } else {
+
+      // False press
+      this.props.navigation.replace('ResultScreen', {
+        playerOneResult: type === CounterControlType.add ? GameResult.WINNER : GameResult.LOOSER,
+        playerTwoResult: type === CounterControlType.add ? GameResult.LOOSER : GameResult.WINNER,
+      });
+
+    }
 
   }
 

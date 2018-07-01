@@ -9,7 +9,7 @@ export enum CounterControlType {
 
 interface Props extends TouchableOpacityProps {
   type: CounterControlType;
-  onControlPressed: (type: CounterControlType) => void;
+  onControlPressed: (type: CounterControlType, isHolding: boolean) => void;
   onTooMuchPressedIn: (type: CounterControlType) => void;
   playerName: string;
   flip?: number;
@@ -88,12 +88,12 @@ export class CounterControl extends Component<Props>{
       const { type } = this.props;
 
       // Default press
-      this.props.onControlPressed(type);
+      this.props.onControlPressed(type, false);
 
       // Long press
       this.timer = setInterval(
         () => {
-          this.props.onControlPressed(type);
+          this.props.onControlPressed(type, true);
         },
         50
       );
@@ -114,4 +114,10 @@ export class CounterControl extends Component<Props>{
     clearInterval(this.timer);
     clearTimeout(this.tooMuchTimer);
   }
+
+  componentWillUnmount() {
+    clearInterval(this.timer);
+    clearTimeout(this.tooMuchTimer);
+  }
+
 }

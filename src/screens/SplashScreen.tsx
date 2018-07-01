@@ -1,8 +1,8 @@
-import { default as React, Component } from 'react';
-import { View, Text, TextInput } from 'react-native';
+import { Component, default as React } from 'react';
+import { Text, View } from 'react-native';
+import { NavigationActions, NavigationScreenProp, StackActions } from 'react-navigation';
 import { StyleSheet } from '../components/StyleSheet';
 import { GameConfig } from '../GameConfig';
-import { NavigationActions, StackActions, NavigationScreenProps, NavigationScreenProp } from 'react-navigation';
 
 const styles = StyleSheet.create({
 

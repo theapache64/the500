@@ -71,7 +71,7 @@ export class PlayerNameScreen extends Component<Props, States> {
     const { playerOneName, playerTwoName } = this.state;
 
     if (!playerOneName || !playerTwoName) {
-      Alert.alert('Error', 'Please specify players name');
+      Alert.alert('Error', 'Please specify players names');
       return;
     }
 

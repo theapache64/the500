@@ -36,5 +36,7 @@ export class GameConfig {
   static maxTimeout: number = 3000;
   static tooMuchHoldTimeout: number = 1500;
   static initialCount: number = 500;
+  static upperCount: number = 1000;
+  static lowerCount: number = 0;
 
 }

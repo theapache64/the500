@@ -1,11 +1,10 @@
-import { default as React, Component } from 'react';
-import { View, Text } from 'react-native';
-import { NavigationScreenProp } from 'react-navigation';
+import { default as React } from 'react';
+import { View } from 'react-native';
 import { BaseNavigationScreenComponent } from '../components/BaseNavigationScreenComponent';
+import { GameResult, Result } from '../components/Result';
+import { SquareButton } from '../components/SquareButton';
 import { StyleSheet } from '../components/StyleSheet';
 import { GameConfig } from '../GameConfig';
-import { SquareButton } from '../components/SquareButton';
-import { Result, GameResult } from '../components/Result';
 
 interface Props {
 
@@ -68,7 +67,7 @@ export class ResultScreen extends BaseNavigationScreenComponent<Props> {
   }
 
   onPlayAgainClicked = () => {
-
+    this.props.navigation.goBack();
   }
 
 }
