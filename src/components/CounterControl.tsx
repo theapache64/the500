@@ -9,6 +9,7 @@ export enum CounterControlType {
 
 interface Props extends TouchableOpacityProps {
   type: CounterControlType;
+  count: number;
   onControlPressed: (type: CounterControlType, isHolding: boolean) => void;
   onTooMuchPressedIn: (type: CounterControlType) => void;
   playerName: string;
@@ -40,6 +41,14 @@ const styles = StyleSheet.create({
   },
 });
 export class CounterControl extends Component<Props>{
+  getRemaningCountNeeded(): number {
+
+    if (this.props.type === CounterControlType.add) {
+      return GameConfig.upperCount - this.props.count;
+    }
+
+    return this.props.count - GameConfig.lowerCount;
+  }
   getFlip = (): any => {
     const { flip } = this.props;
     if (flip) {
@@ -53,7 +62,8 @@ export class CounterControl extends Component<Props>{
 
   render() {
 
-    const { style, ...otherProps } = this.props;
+    const { style, count, ...otherProps } = this.props;
+    const symbol = this.props.type === CounterControlType.add ? '+' : '-';
 
     return (
       <TouchableHighlight
@@ -66,11 +76,11 @@ export class CounterControl extends Component<Props>{
         <View style={styles.vContainer}>
 
           <Text style={styles.tCounterControl}>
-            {this.props.type === CounterControlType.add ? '+' : '-'}
+            {symbol}
           </Text>
 
           <Text style={[styles.tPlayerName, this.getFlip()]}>
-            {this.props.playerName}
+            {`${this.props.playerName} [${symbol}${this.getRemaningCountNeeded()}]`}
           </Text>
 
         </View>

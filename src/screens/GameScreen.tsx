@@ -112,6 +112,7 @@ export class GameScreen extends Component<Props, States> {
     return (
       <View style={[styles.container, this.getBgColor()]}>
         <CounterControl
+          count={this.state.count}
           playerName={playerOneName}
           flip={180}
           onTooMuchPressedIn={this.onTooMuchPressed}
@@ -120,6 +121,7 @@ export class GameScreen extends Component<Props, States> {
         />
         <Counter flip={this.state.scoreFlip} count={this.state.count} />
         <CounterControl
+          count={this.state.count}
           playerName={playerTwoName}
           onTooMuchPressedIn={this.onTooMuchPressed}
           onControlPressed={this.onControlPressed}
