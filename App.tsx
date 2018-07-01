@@ -11,6 +11,7 @@ import { SplashScreen } from './src/screens/SplashScreen';
 import { PlayerNameScreen } from './src/screens/PlayerNameScreen';
 import { GameScreen } from './src/screens/GameScreen';
 import { ResultScreen } from './src/screens/ResultScreen';
+import { GameResult } from './src/components/Result';
 
 const ROOT_STACK = createStackNavigator(
   {
@@ -22,7 +23,9 @@ const ROOT_STACK = createStackNavigator(
   {
     initialRouteName: 'ResultScreen',
     initialRouteParams: {
-      winnerName: 'SAFIYA',
+      playerOneResult: GameResult.WINNER,
+      playerTwoResult: GameResult.LOOSER,
+
       playerOneName: 'SHIFAR',
       playerTwoName: 'SAFIYA',
     },

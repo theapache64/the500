@@ -1,8 +1,8 @@
 import { default as React, Component } from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, Text, TouchableOpacity, TouchableOpacityProps } from 'react-native';
 import { StyleSheet } from './StyleSheet';
 
-interface Props {
+interface Props extends TouchableOpacityProps {
   title: string;
 }
 
@@ -33,10 +33,19 @@ const styles = StyleSheet.create({
 
 export class SquareButton extends Component<Props, States>{
   render() {
+
+    const { style, ...otherProps } = this.props;
+
     return (
       <View style={styles.vContainer}>
-        <TouchableOpacity style={styles.toSquareButton}>
-          <Text style={styles.tTitle}>{this.props.title}</Text>
+        <TouchableOpacity
+          style={[styles.toSquareButton, style]}
+          {...otherProps}
+        >
+          <Text style={styles.tTitle}>
+            {this.props.title}
+          </Text>
+          
         </TouchableOpacity>
       </View>
     );
