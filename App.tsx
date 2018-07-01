@@ -8,13 +8,17 @@
 import { default as React, Component } from 'react';
 import { createStackNavigator } from 'react-navigation';
 import { SplashScreen } from './src/screens/SplashScreen';
+import { PlayerNameScreen } from './src/screens/PlayerNameScreen';
+import { GameScreen } from './src/screens/GameScreen';
 
 const ROOT_STACK = createStackNavigator(
   {
     SplashScreen,
+    PlayerNameScreen,
+    GameScreen,
   },
   {
-    initialRouteName: 'SplashScreen',
+    initialRouteName: 'PlayerNameScreen',
     headerMode: 'none',
   });
 

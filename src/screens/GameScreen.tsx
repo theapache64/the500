@@ -23,7 +23,10 @@ export enum GameStates {
   'start', 'end', 'pause',
 }
 
-interface Props { }
+interface Props {
+  playerOneName: string;
+  playerTwoName: string;
+}
 
 interface States {
   count: number;
@@ -79,7 +82,7 @@ export class GameScreen extends Component<Props, States> {
     super(props);
 
     this.state = {
-      count: 555,
+      count: GameConfig.initialCount,
       gameState: GameStates.pause,
     };
   }

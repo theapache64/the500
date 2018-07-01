@@ -1,4 +1,4 @@
-import { GameStates } from '../App';
+import { GameStates } from './screens/GameScreen';
 
 export class GameConfig {
   static getBackgroundColor = (gameState: GameStates): string => {
@@ -35,5 +35,6 @@ export class GameConfig {
   static minTimeout: number = 1000;
   static maxTimeout: number = 3000;
   static tooMuchHoldTimeout: number = 1500;
+  static initialCount: number = 500;
 
 }
