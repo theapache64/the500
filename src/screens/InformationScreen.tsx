@@ -2,7 +2,7 @@ import { default as React, Component } from 'react';
 import { View, Text, ScrollView, TouchableOpacity } from 'react-native';
 import { StyleSheet } from '../misc/StyleSheet';
 import { GameConfig } from '../GameConfig';
-import Icon from 'react-native-vector-icons/SimpleLineIcons';
+import { default as Icon } from 'react-native-vector-icons/SimpleLineIcons';
 import { BaseNavigationScreenComponent } from '../components/BaseNavigationScreenComponent';
 
 interface Props {

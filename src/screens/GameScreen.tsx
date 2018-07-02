@@ -16,7 +16,7 @@ import { RandomNumber } from '../utils/RandomNumber';
 import { GameResult } from '../components/Result';
 
 export enum GameStates {
-  'start', 'end', 'pause'
+  'start', 'end', 'pause',
 }
 
 interface Props {
@@ -27,7 +27,8 @@ interface States {
   count: number;
   gameState: GameStates;
   scoreFlip: number;
-  isResultSubmitted : boolean;
+  playerOneResult: GameResult;
+  playerTwoResult: GameResult;
 }
 
 const styles = StyleSheet.create({
@@ -45,7 +46,8 @@ export class GameScreen extends Component<Props, States> {
 
     this.state = {
       scoreFlip: 90,
-      isResultSubmitted : false,
+      playerOneResult: null,
+      playerTwoResult: null,
       count: GameConfig.initialCount,
       gameState: GameStates.start,
     };
@@ -112,6 +114,28 @@ export class GameScreen extends Component<Props, States> {
     { backgroundColor: GameConfig.getBackgroundColor(this.state.gameState) }
   )
 
+  shouldComponentUpdate(nextProps: Props, nextState: States) {
+
+    const playerOneName = this.props.navigation.getParam('playerOneName');
+    const playerTwoName = this.props.navigation.getParam('playerTwoName');
+
+    const { playerOneResult, playerTwoResult } = this.state;
+
+    if (playerOneResult && playerTwoResult) {
+      
+      this.props.navigation.replace('ResultScreen', {
+        playerOneName,
+        playerTwoName,
+        playerOneResult,
+        playerTwoResult,
+      });
+
+      return false;
+    }
+
+    return true;
+  }
+
   render() {
 
     const playerOneName = this.props.navigation.getParam('playerOneName');
@@ -147,45 +171,39 @@ export class GameScreen extends Component<Props, States> {
       this.setResult(type);
     } else {
 
-      if (!this.state.isResultSubmitted) {
+      // Green or red
+      Vibration.vibrate(100, false);
 
-        // Green or red
-        Vibration.vibrate(100, false);
+      this.setState(
+        prevState => ({
+          scoreFlip: type === CounterControlType.add ? 0 : 180,
+          count: type === CounterControlType.add ? prevState.count + 1 : prevState.count - 1,
+        }),
+        () => {
+          // Checking count 
+          const { count } = this.state;
 
-        this.setState(
-          prevState => ({
-            scoreFlip: type === CounterControlType.add ? 0 : 180,
-            count: type === CounterControlType.add ? prevState.count + 1 : prevState.count - 1,
-          }),
-          () => {
-            // Checking count 
-            const { count } = this.state;
+          if (count >= GameConfig.upperCount || count <= GameConfig.lowerCount) {
 
-            if (count >= GameConfig.upperCount || count <= GameConfig.lowerCount) {
+            const playerOneName = this.props.navigation.getParam('playerOneName');
+            const playerTwoName = this.props.navigation.getParam('playerTwoName');
 
-              const playerOneName = this.props.navigation.getParam('playerOneName');
-              const playerTwoName = this.props.navigation.getParam('playerTwoName');
+            // Limit reached
+            this.setState({
 
-              // Limit reached
-              this.props.navigation.replace('ResultScreen', {
+              playerOneResult: count <= GameConfig.lowerCount
+                ? GameResult.WINNER
+                : GameResult.LOOSER,
 
-                playerOneName,
-                playerTwoName,
+              playerTwoResult: count >= GameConfig.upperCount
+                ? GameResult.WINNER
+                : GameResult.LOOSER,
 
-                playerOneResult: count <= GameConfig.lowerCount
-                  ? GameResult.WINNER
-                  : GameResult.LOOSER,
-
-                playerTwoResult: count >= GameConfig.upperCount
-                  ? GameResult.WINNER
-                  : GameResult.LOOSER,
-
-              });
-            }
-
+            });
           }
-        );
-      }
+
+        }
+      );
 
     }
 
@@ -194,10 +212,6 @@ export class GameScreen extends Component<Props, States> {
   private setResult = (type: CounterControlType) => {
 
     this.setState({
-      isResultSubmitted: true
-    });
-
-    this.props.navigation.replace('ResultScreen', {
       playerOneResult: type === CounterControlType.add ? GameResult.WINNER : GameResult.LOOSER,
       playerTwoResult: type === CounterControlType.add ? GameResult.LOOSER : GameResult.WINNER,
     });

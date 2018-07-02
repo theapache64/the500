@@ -23,13 +23,13 @@ const ROOT_STACK = createStackNavigator(
     ResultScreen,
   },
   {
-    initialRouteName: 'SplashScreen',
+    initialRouteName: 'GameScreen',
     initialRouteParams: {
       playerOneResult: GameResult.WINNER,
       playerTwoResult: GameResult.LOOSER,
 
-      playerOneName: 'SHIFAR',
-      playerTwoName: 'SHEEREEN',
+      playerOneName: 'SHEEREEN',
+      playerTwoName: 'SHIFAR',
     },
     headerMode: 'none',
   });

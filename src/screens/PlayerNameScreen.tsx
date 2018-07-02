@@ -5,7 +5,7 @@ import { CustomButton } from '../components/CustomButton';
 import { Input } from '../components/Input';
 import { StyleSheet } from '../misc/StyleSheet';
 import { GameConfig } from '../GameConfig';
-import Icon from 'react-native-vector-icons/SimpleLineIcons';
+import { default as Icon } from 'react-native-vector-icons/SimpleLineIcons';
 
 const styles = StyleSheet.create({
   container: {
