@@ -12,22 +12,24 @@ import { PlayerNameScreen } from './src/screens/PlayerNameScreen';
 import { GameScreen } from './src/screens/GameScreen';
 import { ResultScreen } from './src/screens/ResultScreen';
 import { GameResult } from './src/components/Result';
+import { InformationScreen } from './src/screens/InformationScreen';
 
 const ROOT_STACK = createStackNavigator(
   {
     SplashScreen,
     PlayerNameScreen,
+    InformationScreen,
     GameScreen,
     ResultScreen,
   },
   {
-    initialRouteName: 'PlayerNameScreen',
+    initialRouteName: 'SplashScreen',
     initialRouteParams: {
       playerOneResult: GameResult.WINNER,
       playerTwoResult: GameResult.LOOSER,
 
       playerOneName: 'SHIFAR',
-      playerTwoName: 'SAFIYA',
+      playerTwoName: 'SHEEREEN',
     },
     headerMode: 'none',
   });

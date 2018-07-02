@@ -1,10 +1,11 @@
 import { Component, default as React } from 'react';
-import { Alert, View } from 'react-native';
+import { Alert, View, TouchableOpacity } from 'react-native';
 import { NavigationScreenProp } from 'react-navigation';
 import { CustomButton } from '../components/CustomButton';
 import { Input } from '../components/Input';
 import { StyleSheet } from '../misc/StyleSheet';
 import { GameConfig } from '../GameConfig';
+import Icon from 'react-native-vector-icons/SimpleLineIcons';
 
 const styles = StyleSheet.create({
   container: {
@@ -18,10 +19,17 @@ const styles = StyleSheet.create({
 
   vHeader: {
     flexDirection: 'row',
-    backgroundColor: 'red',
+    justifyContent: 'flex-end',
+    alignItems: 'center',
     width: '100%',
     height: 50,
-  }
+  },
+
+  iIcon: {
+    color: '#FFF',
+    fontSize: 20,
+    padding: 10,
+  },
 });
 
 interface Props {
@@ -50,6 +58,11 @@ export class PlayerNameScreen extends Component<Props, States> {
 
         <View style={styles.vHeader}>
 
+          {/* Information icon */}
+          <TouchableOpacity onPress={this.onInformationClicked}>
+            <Icon style={styles.iIcon} name={'info'} />
+          </TouchableOpacity>
+
         </View>
 
         {/* Player one  */}
@@ -62,12 +75,10 @@ export class PlayerNameScreen extends Component<Props, States> {
         </View>
 
         {/* Submit */}
-        <View style={styles.vGrid}>
-          <CustomButton
-            onPress={this.onStartClicked}
-            title={'START'}
-          />
-        </View>
+        <CustomButton
+          onPress={this.onStartClicked}
+          title={'START'}
+        />
 
         {/* Player two */}
         <View style={styles.vGrid}>
@@ -80,6 +91,10 @@ export class PlayerNameScreen extends Component<Props, States> {
 
       </View >
     );
+  }
+
+  onInformationClicked = () => {
+    this.props.navigation.navigate('InformationScreen');
   }
 
   onStartClicked = () => {

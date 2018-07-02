@@ -8,7 +8,7 @@ interface Props extends TouchableOpacityProps {
 
 const styles = StyleSheet.create({
   toContainer: {
-    flex: 1,
+    alignSelf: 'center',
     alignItems: 'center',
     justifyContent: 'center',
   },
