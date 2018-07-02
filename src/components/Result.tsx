@@ -1,6 +1,6 @@
 import { default as React, Component } from 'react';
 import { View, Text } from 'react-native';
-import { StyleSheet } from './StyleSheet';
+import { StyleSheet } from '../misc/StyleSheet';
 
 export enum GameResult {
   'WINNER' = 'WINNER',

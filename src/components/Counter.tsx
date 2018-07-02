@@ -1,6 +1,6 @@
 import { default as React, Component } from 'react';
 import { Text, TextProps } from 'react-native';
-import { StyleSheet } from './StyleSheet';
+import { StyleSheet } from '../misc/StyleSheet';
 
 interface Props extends TextProps {
   count: number;

@@ -1,6 +1,6 @@
 import { default as React, Component } from 'react';
 import { TouchableOpacity, Text, TouchableOpacityProps } from 'react-native';
-import { StyleSheet } from './StyleSheet';
+import { StyleSheet } from '../misc/StyleSheet';
 
 interface Props extends TouchableOpacityProps {
   title: string;

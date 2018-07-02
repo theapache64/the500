@@ -3,7 +3,7 @@ import { Alert, View } from 'react-native';
 import { NavigationScreenProp } from 'react-navigation';
 import { CustomButton } from '../components/CustomButton';
 import { Input } from '../components/Input';
-import { StyleSheet } from '../components/StyleSheet';
+import { StyleSheet } from '../misc/StyleSheet';
 import { GameConfig } from '../GameConfig';
 
 const styles = StyleSheet.create({

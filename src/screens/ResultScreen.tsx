@@ -3,7 +3,7 @@ import { View } from 'react-native';
 import { BaseNavigationScreenComponent } from '../components/BaseNavigationScreenComponent';
 import { GameResult, Result } from '../components/Result';
 import { SquareButton } from '../components/SquareButton';
-import { StyleSheet } from '../components/StyleSheet';
+import { StyleSheet } from '../misc/StyleSheet';
 import { GameConfig } from '../GameConfig';
 
 interface Props {

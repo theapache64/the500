@@ -1,6 +1,6 @@
 import { Component, default as React } from 'react';
 import { Text, TouchableHighlight, TouchableOpacityProps, View } from 'react-native';
-import { StyleSheet } from './StyleSheet';
+import { StyleSheet } from '../misc/StyleSheet';
 import { GameConfig } from '../GameConfig';
 
 export enum CounterControlType {
