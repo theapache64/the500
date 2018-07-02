@@ -15,6 +15,13 @@ const styles = StyleSheet.create({
   vGrid: {
     flex: 1,
   },
+
+  vHeader: {
+    flexDirection: 'row',
+    backgroundColor: 'red',
+    width: '100%',
+    height: 50,
+  }
 });
 
 interface Props {
@@ -40,6 +47,11 @@ export class PlayerNameScreen extends Component<Props, States> {
   render() {
     return (
       <View style={styles.container}>
+
+        <View style={styles.vHeader}>
+
+        </View>
+
         {/* Player one  */}
         <View style={styles.vGrid}>
           <Input
@@ -51,7 +63,10 @@ export class PlayerNameScreen extends Component<Props, States> {
 
         {/* Submit */}
         <View style={styles.vGrid}>
-          <CustomButton onPress={this.onStartClicked} title={'START'} />
+          <CustomButton
+            onPress={this.onStartClicked}
+            title={'START'}
+          />
         </View>
 
         {/* Player two */}
