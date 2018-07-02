@@ -13,7 +13,7 @@ interface Props {
 const styles = StyleSheet.create({
   vContainer: {
     flex: 1,
-    backgroundColor: GameConfig.color.pauseColor,
+    backgroundColor: GameConfig.color.backgroundColor,
   },
 
   tWinnerName: {
@@ -36,11 +36,13 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
 });
-// tslint:disable
+
 export class ResultScreen extends BaseNavigationScreenComponent<Props> {
 
   render() {
 
+    const playerOneName = this.props.navigation.getParam('playerOneName');
+    const playerTwoName = this.props.navigation.getParam('playerTwoName');
     const playerOneResult: GameResult = this.props.navigation.getParam('playerOneResult');
     const playerTwoResult: GameResult = this.props.navigation.getParam('playerTwoResult');
 
@@ -49,7 +51,7 @@ export class ResultScreen extends BaseNavigationScreenComponent<Props> {
 
         {/* Player One status */}
         <View style={[styles.vGrid, styles.vFlip180]}>
-          <Result result={playerOneResult} />
+          <Result name={playerOneName} result={playerOneResult} />
         </View>
 
         {/* Start again and Exit  */}
@@ -59,11 +61,11 @@ export class ResultScreen extends BaseNavigationScreenComponent<Props> {
 
         {/* Player two status */}
         <View style={styles.vGrid}>
-          <Result result={playerTwoResult} />
+          <Result name={playerTwoName} result={playerTwoResult} />
         </View>
 
       </View>
-    )
+    );
   }
 
   onPlayAgainClicked = () => {

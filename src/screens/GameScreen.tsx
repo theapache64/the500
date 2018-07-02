@@ -29,6 +29,12 @@ interface States {
   scoreFlip: number;
 }
 
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+});
+
 export class GameScreen extends Component<Props, States> {
 
   stateChangeTimer = 0;
@@ -39,7 +45,7 @@ export class GameScreen extends Component<Props, States> {
     this.state = {
       scoreFlip: 90,
       count: GameConfig.initialCount,
-      gameState: GameStates.pause,
+      gameState: GameStates.start,
     };
   }
 
@@ -134,55 +140,59 @@ export class GameScreen extends Component<Props, States> {
 
     const { gameState } = this.state;
 
-    if (gameState !== GameStates.pause) {
-      // Green or red
-      Vibration.vibrate(100, false);
-
-      this.setState(
-        prevState => ({
-          scoreFlip: type === CounterControlType.add ? 0 : 180,
-          count: type === CounterControlType.add ? prevState.count + 1 : prevState.count - 1,
-        }),
-        () => {
-          // Checking count 
-          const { count } = this.state;
-
-          if (count >= GameConfig.upperCount || count <= GameConfig.lowerCount) {
-            // Limit reached
-            this.props.navigation.replace('ResultScreen', {
-
-              playerOneResult: count <= GameConfig.lowerCount
-                ? GameResult.WINNER
-                : GameResult.LOOSER,
-
-              playerTwoResult: count >= GameConfig.upperCount
-                ? GameResult.WINNER
-                : GameResult.LOOSER,
-
-            });
-          }
-
-        }
-      );
-    } else {
-
-      // False press
-      this.props.navigation.replace('ResultScreen', {
-        playerOneResult: type === CounterControlType.add ? GameResult.WINNER : GameResult.LOOSER,
-        playerTwoResult: type === CounterControlType.add ? GameResult.LOOSER : GameResult.WINNER,
-      });
-
+    if ((gameState === GameStates.end && !isHolding) || gameState === GameStates.pause) {
+      // Single click at orange or hold or single click at red
+      this.setResult(type);
+      return;
     }
 
+    // Green or red
+    Vibration.vibrate(100, false);
+
+    this.setState(
+      prevState => ({
+        scoreFlip: type === CounterControlType.add ? 0 : 180,
+        count: type === CounterControlType.add ? prevState.count + 1 : prevState.count - 1,
+      }),
+      () => {
+        // Checking count 
+        const { count } = this.state;
+
+        if (count >= GameConfig.upperCount || count <= GameConfig.lowerCount) {
+
+          const playerOneName = this.props.navigation.getParam('playerOneName');
+          const playerTwoName = this.props.navigation.getParam('playerTwoName');
+
+          // Limit reached
+          this.props.navigation.replace('ResultScreen', {
+
+            playerOneName,
+            playerTwoName,
+
+            playerOneResult: count <= GameConfig.lowerCount
+              ? GameResult.WINNER
+              : GameResult.LOOSER,
+
+            playerTwoResult: count >= GameConfig.upperCount
+              ? GameResult.WINNER
+              : GameResult.LOOSER,
+
+          });
+        }
+
+      }
+    );
+
+  }
+
+  private setResult = (type: CounterControlType) => {
+    this.props.navigation.replace('ResultScreen', {
+      playerOneResult: type === CounterControlType.add ? GameResult.WINNER : GameResult.LOOSER,
+      playerTwoResult: type === CounterControlType.add ? GameResult.LOOSER : GameResult.WINNER,
+    });
   }
 
   private onTooMuchPressed = (type: CounterControlType) => {
     // The pressed player will fail here
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-});

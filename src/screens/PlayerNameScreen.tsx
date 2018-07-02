@@ -9,7 +9,7 @@ import { GameConfig } from '../GameConfig';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: GameConfig.color.pauseColor,
+    backgroundColor: GameConfig.color.backgroundColor,
   },
 
   vGrid: {

@@ -23,13 +23,13 @@ export class GameConfig {
   // Colors
   static readonly color = class {
 
-    static readonly pauseColor = '#212121';
+    static readonly backgroundColor = '#212121';
+    static readonly pauseColor = '#D32F2F';
 
     static readonly startColor = '#388E3C';
     static readonly startColorDark = '#1B5E20';
 
-    static readonly endColor = '#D32F2F';
-    static readonly endColorDark = '#B71C1C';
+    static readonly endColor = '#F57C00';
   };
 
   static minTimeout: number = 1000;

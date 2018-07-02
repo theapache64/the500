@@ -8,6 +8,7 @@ export enum GameResult {
 }
 
 interface Props {
+  name: string;
   result: GameResult;
 }
 
@@ -26,17 +27,28 @@ const styles = StyleSheet.create({
     fontSize: 30,
     color: '#FFF',
   },
+
+  tName: {
+    color: '#FFF',
+  },
 });
 
 export class Result extends Component<Props, States>{
   render() {
     return (
       <View style={styles.vContainer}>
+
         <Text
           style={styles.tTitle}
         >
-          {this.props.result.toString()}
+          {this.props.result}
         </Text>
+
+        {/* Name */}
+        <Text style={styles.tName}>
+          {this.props.name}
+        </Text>
+
       </View>
     );
   }

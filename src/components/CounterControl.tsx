@@ -41,20 +41,6 @@ const styles = StyleSheet.create({
   },
 });
 export class CounterControl extends Component<Props>{
-  getRemaningCountNeeded(): number {
-
-    if (this.props.type === CounterControlType.add) {
-      return GameConfig.upperCount - this.props.count;
-    }
-
-    return this.props.count - GameConfig.lowerCount;
-  }
-  getFlip = (): any => {
-    const { flip } = this.props;
-    if (flip) {
-      return { transform: [{ rotate: `${flip}deg` }] };
-    }
-  }
 
   timer = 0;
   isAlreadyPressed = false;
@@ -87,6 +73,21 @@ export class CounterControl extends Component<Props>{
 
       </TouchableHighlight>
     );
+  }
+
+  getRemaningCountNeeded(): number {
+
+    if (this.props.type === CounterControlType.add) {
+      return GameConfig.upperCount - this.props.count;
+    }
+
+    return this.props.count - GameConfig.lowerCount;
+  }
+  getFlip = (): any => {
+    const { flip } = this.props;
+    if (flip) {
+      return { transform: [{ rotate: `${flip}deg` }] };
+    }
   }
 
   private onControlPressedIn = () => {
