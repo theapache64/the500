@@ -6,7 +6,7 @@ import { default as Icon } from 'react-native-vector-icons/SimpleLineIcons';
 import { BaseNavigationScreenComponent } from '../components/BaseNavigationScreenComponent';
 
 interface Props {
-
+  
 }
 
 interface States {
@@ -43,7 +43,7 @@ export class InformationScreen extends BaseNavigationScreenComponent<Props, Stat
 # Random notes
 
 1) Game starts at ${GameConfig.initialCount}
-2) Player who presses the button first gets the 'action'!
+2) Player who press the button first will get the 'action'!
 
 2) Player 1 should make it ${GameConfig.lowerCount}
 3) Player 2 should make it ${GameConfig.upperCount}

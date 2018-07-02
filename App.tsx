@@ -13,6 +13,7 @@ import { GameScreen } from './src/screens/GameScreen';
 import { ResultScreen } from './src/screens/ResultScreen';
 import { GameResult } from './src/components/Result';
 import { InformationScreen } from './src/screens/InformationScreen';
+import { StatusBar, View } from 'react-native';
 
 const ROOT_STACK = createStackNavigator(
   {
@@ -23,12 +24,12 @@ const ROOT_STACK = createStackNavigator(
     ResultScreen,
   },
   {
-    initialRouteName: 'GameScreen',
+    initialRouteName: 'SplashScreen',
     initialRouteParams: {
       playerOneResult: GameResult.WINNER,
       playerTwoResult: GameResult.LOOSER,
 
-      playerOneName: 'SHEEREEN',
+      playerOneName: 'SAFIYA',
       playerTwoName: 'SHIFAR',
     },
     headerMode: 'none',

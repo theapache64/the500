@@ -7,7 +7,7 @@
  */
 
 import { Component, default as React } from 'react';
-import { StyleSheet, Vibration, View } from 'react-native';
+import { StyleSheet, Vibration, View, StatusBar } from 'react-native';
 import { NavigationScreenProp } from 'react-navigation';
 import { Counter } from '../components/Counter';
 import { CounterControl, CounterControlType } from '../components/CounterControl';
@@ -114,7 +114,7 @@ export class GameScreen extends Component<Props, States> {
     { backgroundColor: GameConfig.getBackgroundColor(this.state.gameState) }
   )
 
-  shouldComponentUpdate(nextProps: Props, nextState: States) {
+  shouldComponentUpdate() {
 
     const playerOneName = this.props.navigation.getParam('playerOneName');
     const playerTwoName = this.props.navigation.getParam('playerTwoName');
@@ -122,7 +122,6 @@ export class GameScreen extends Component<Props, States> {
     const { playerOneResult, playerTwoResult } = this.state;
 
     if (playerOneResult && playerTwoResult) {
-      
       this.props.navigation.replace('ResultScreen', {
         playerOneName,
         playerTwoName,
@@ -142,23 +141,29 @@ export class GameScreen extends Component<Props, States> {
     const playerTwoName = this.props.navigation.getParam('playerTwoName');
 
     return (
-      <View style={[styles.container, this.getBgColor()]}>
-        <CounterControl
-          count={this.state.count}
-          playerName={playerOneName}
-          flip={180}
-          onTooMuchPressedIn={this.onTooMuchPressed}
-          onControlPressed={this.onControlPressed}
-          type={CounterControlType.substract}
+      <View style={{ flex: 1 }}>
+        <StatusBar
+          backgroundColor={GameConfig.getBackgroundColor(this.state.gameState)}
+          barStyle={'light-content'}
         />
-        <Counter flip={this.state.scoreFlip} count={this.state.count} />
-        <CounterControl
-          count={this.state.count}
-          playerName={playerTwoName}
-          onTooMuchPressedIn={this.onTooMuchPressed}
-          onControlPressed={this.onControlPressed}
-          type={CounterControlType.add}
-        />
+        <View style={[styles.container, this.getBgColor()]}>
+          <CounterControl
+            count={this.state.count}
+            playerName={playerOneName}
+            flip={180}
+            onTooMuchPressedIn={this.onTooMuchPressed}
+            onControlPressed={this.onControlPressed}
+            type={CounterControlType.substract}
+          />
+          <Counter flip={this.state.scoreFlip} count={this.state.count} />
+          <CounterControl
+            count={this.state.count}
+            playerName={playerTwoName}
+            onTooMuchPressedIn={this.onTooMuchPressed}
+            onControlPressed={this.onControlPressed}
+            type={CounterControlType.add}
+          />
+        </View>
       </View>
     );
   }

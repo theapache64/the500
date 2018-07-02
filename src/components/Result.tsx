@@ -37,7 +37,8 @@ export class Result extends Component<Props, States>{
   render() {
     return (
       <View style={styles.vContainer}>
-
+        
+        {/* Loser  */}
         <Text
           style={styles.tTitle}
         >

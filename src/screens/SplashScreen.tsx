@@ -1,5 +1,5 @@
 import { Component, default as React } from 'react';
-import { Text, View } from 'react-native';
+import { Text, View, StatusBar } from 'react-native';
 import { NavigationActions, NavigationScreenProp, StackActions } from 'react-navigation';
 import { StyleSheet } from '../misc/StyleSheet';
 import { GameConfig } from '../GameConfig';
@@ -50,9 +50,15 @@ export class SplashScreen extends Component<Props> {
 
   render() {
     return (
-      <View style={styles.container}>
-        <Text style={styles.tTitle}>{GameConfig.initialCount}</Text>
-        <Text style={styles.tPleaseWait}>Please wait</Text>
+      <View style={{ flex: 1 }}>
+        <StatusBar
+          backgroundColor={GameConfig.color.endColor}
+          barStyle={'light-content'}
+        />
+        <View style={styles.container}>
+          <Text style={styles.tTitle}>{GameConfig.initialCount}</Text>
+          <Text style={styles.tPleaseWait}>Please wait</Text>
+        </View>
       </View>
     );
   }
