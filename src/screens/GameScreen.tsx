@@ -16,7 +16,7 @@ import { RandomNumber } from '../utils/RandomNumber';
 import { GameResult } from '../components/Result';
 
 export enum GameStates {
-  'start', 'end', 'pause',
+  'start', 'end', 'pause'
 }
 
 interface Props {
@@ -27,6 +27,7 @@ interface States {
   count: number;
   gameState: GameStates;
   scoreFlip: number;
+  isResultSubmitted : boolean;
 }
 
 const styles = StyleSheet.create({
@@ -44,6 +45,7 @@ export class GameScreen extends Component<Props, States> {
 
     this.state = {
       scoreFlip: 90,
+      isResultSubmitted : false,
       count: GameConfig.initialCount,
       gameState: GameStates.start,
     };
@@ -143,49 +145,58 @@ export class GameScreen extends Component<Props, States> {
     if ((gameState === GameStates.end && !isHolding) || gameState === GameStates.pause) {
       // Single click at orange or hold or single click at red
       this.setResult(type);
-      return;
-    }
+    } else {
 
-    // Green or red
-    Vibration.vibrate(100, false);
+      if (!this.state.isResultSubmitted) {
 
-    this.setState(
-      prevState => ({
-        scoreFlip: type === CounterControlType.add ? 0 : 180,
-        count: type === CounterControlType.add ? prevState.count + 1 : prevState.count - 1,
-      }),
-      () => {
-        // Checking count 
-        const { count } = this.state;
+        // Green or red
+        Vibration.vibrate(100, false);
 
-        if (count >= GameConfig.upperCount || count <= GameConfig.lowerCount) {
+        this.setState(
+          prevState => ({
+            scoreFlip: type === CounterControlType.add ? 0 : 180,
+            count: type === CounterControlType.add ? prevState.count + 1 : prevState.count - 1,
+          }),
+          () => {
+            // Checking count 
+            const { count } = this.state;
 
-          const playerOneName = this.props.navigation.getParam('playerOneName');
-          const playerTwoName = this.props.navigation.getParam('playerTwoName');
+            if (count >= GameConfig.upperCount || count <= GameConfig.lowerCount) {
 
-          // Limit reached
-          this.props.navigation.replace('ResultScreen', {
+              const playerOneName = this.props.navigation.getParam('playerOneName');
+              const playerTwoName = this.props.navigation.getParam('playerTwoName');
 
-            playerOneName,
-            playerTwoName,
+              // Limit reached
+              this.props.navigation.replace('ResultScreen', {
 
-            playerOneResult: count <= GameConfig.lowerCount
-              ? GameResult.WINNER
-              : GameResult.LOOSER,
+                playerOneName,
+                playerTwoName,
 
-            playerTwoResult: count >= GameConfig.upperCount
-              ? GameResult.WINNER
-              : GameResult.LOOSER,
+                playerOneResult: count <= GameConfig.lowerCount
+                  ? GameResult.WINNER
+                  : GameResult.LOOSER,
 
-          });
-        }
+                playerTwoResult: count >= GameConfig.upperCount
+                  ? GameResult.WINNER
+                  : GameResult.LOOSER,
 
+              });
+            }
+
+          }
+        );
       }
-    );
+
+    }
 
   }
 
   private setResult = (type: CounterControlType) => {
+
+    this.setState({
+      isResultSubmitted: true
+    });
+
     this.props.navigation.replace('ResultScreen', {
       playerOneResult: type === CounterControlType.add ? GameResult.WINNER : GameResult.LOOSER,
       playerTwoResult: type === CounterControlType.add ? GameResult.LOOSER : GameResult.WINNER,
