@@ -4,7 +4,7 @@ import { StyleSheet } from '../misc/StyleSheet';
 
 export enum GameResult {
   'WINNER' = 'WINNER',
-  'LOOSER' = 'LOOSER',
+  'LOSER' = 'LOSER',
 }
 
 interface Props {
@@ -37,8 +37,8 @@ export class Result extends Component<Props, States>{
   render() {
     return (
       <View style={styles.vContainer}>
-        
-        {/* Loser  */}
+
+        {/* Loser */}
         <Text
           style={styles.tTitle}
         >

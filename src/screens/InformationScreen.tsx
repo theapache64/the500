@@ -4,9 +4,10 @@ import { StyleSheet } from '../misc/StyleSheet';
 import { GameConfig } from '../GameConfig';
 import { default as Icon } from 'react-native-vector-icons/SimpleLineIcons';
 import { BaseNavigationScreenComponent } from '../components/BaseNavigationScreenComponent';
+import { StatusBarComponent } from '../components/StatusBarComponent';
 
 interface Props {
-  
+
 }
 
 interface States {
@@ -42,34 +43,35 @@ export class InformationScreen extends BaseNavigationScreenComponent<Props, Stat
     const instructions = `
 # Random notes
 
-1) Game starts at ${GameConfig.initialCount}
-2) Player who press the button first will get the 'action'!
+- Game starts at ${GameConfig.initialCount}
+- Player who press the button first will get the 'action'!
+- Player 1 should make it ${GameConfig.lowerCount}
+- Player 2 should make it ${GameConfig.upperCount}
 
-2) Player 1 should make it ${GameConfig.lowerCount}
-3) Player 2 should make it ${GameConfig.upperCount}
-4) Green turns to Orange, and Orange turns to Red
-
-5) Green = You are ready for the 'action'
-6) Orange = You should release your finger now!
-7) Red = If you're still holding the button, your opponent wins!
+- Green turns to Orange, and Orange turns to Red
+- Green = You are ready for the 'action'
+- Orange = You should release your finger now!
+- Red = If you're still holding the button, your opponent wins!
 
     `;
 
     return (
-      <View style={styles.vContainer}>
+      <StatusBarComponent color={GameConfig.color.backgroundColor}>
+        <View style={styles.vContainer}>
 
-        {/* Back button */}
-        <TouchableOpacity onPress={this.onBackButtonPressed}>
-          <Icon style={styles.iBackIcon} name={'arrow-left-circle'} />
-        </TouchableOpacity>
+          {/* Back button */}
+          <TouchableOpacity onPress={this.onBackButtonPressed}>
+            <Icon style={styles.iBackIcon} name={'arrow-left-circle'} />
+          </TouchableOpacity>
 
-        {/* Instructions */}
-        <ScrollView contentContainerStyle={styles.vInstructions}>
-          <Text style={styles.tInstruction}>
-            {instructions}
-          </Text>
-        </ScrollView>
-      </View>
+          {/* Instructions */}
+          <ScrollView contentContainerStyle={styles.vInstructions}>
+            <Text style={styles.tInstruction}>
+              {instructions}
+            </Text>
+          </ScrollView>
+        </View>
+      </StatusBarComponent>
     );
   }
 

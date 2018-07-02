@@ -1,18 +1,27 @@
-import { default as React, Component } from 'react';
-import { View, Text } from 'react-native';
+import { Component, default as React } from 'react';
+import { StatusBar, View } from 'react-native';
+import { StyleSheet } from '../misc/StyleSheet';
+
+const styles = StyleSheet.create({
+  vContainer: {
+    flex: 1,
+  },
+});
 
 interface Props {
-
+  color: string;
 }
+export class StatusBarComponent extends Component<Props>{
 
-interface States {
-
-}
-export class StatusBarComponent extends Component<Props, States>{
   render() {
     return (
       <View style={styles.vContainer}>
-        <Text>This is sample text</Text>
+        <StatusBar
+          backgroundColor={this.props.color}
+          barStyle={'light-content'}
+        />
+
+        {this.props.children}
       </View>
     );
   }

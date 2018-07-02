@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
 
   tTitle: {
     color: '#FFF',
-    fontSize: 50,
+    fontSize: 30,
   },
 });
 

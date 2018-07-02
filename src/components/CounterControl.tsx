@@ -120,7 +120,6 @@ export class CounterControl extends Component<Props>{
 
   private onControlPressedOut = () => {
 
-
     this.isAlreadyPressed = false;
 
     clearInterval(this.timer);

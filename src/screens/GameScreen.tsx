@@ -198,11 +198,11 @@ export class GameScreen extends Component<Props, States> {
 
               playerOneResult: count <= GameConfig.lowerCount
                 ? GameResult.WINNER
-                : GameResult.LOOSER,
+                : GameResult.LOSER,
 
               playerTwoResult: count >= GameConfig.upperCount
                 ? GameResult.WINNER
-                : GameResult.LOOSER,
+                : GameResult.LOSER,
 
             });
           }
@@ -217,8 +217,8 @@ export class GameScreen extends Component<Props, States> {
   private setResult = (type: CounterControlType) => {
 
     this.setState({
-      playerOneResult: type === CounterControlType.add ? GameResult.WINNER : GameResult.LOOSER,
-      playerTwoResult: type === CounterControlType.add ? GameResult.LOOSER : GameResult.WINNER,
+      playerOneResult: type === CounterControlType.add ? GameResult.WINNER : GameResult.LOSER,
+      playerTwoResult: type === CounterControlType.add ? GameResult.LOSER : GameResult.WINNER,
     });
   }
 

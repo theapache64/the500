@@ -6,6 +6,7 @@ import { Input } from '../components/Input';
 import { StyleSheet } from '../misc/StyleSheet';
 import { GameConfig } from '../GameConfig';
 import { default as Icon } from 'react-native-vector-icons/SimpleLineIcons';
+import { StatusBarComponent } from '../components/StatusBarComponent';
 
 const styles = StyleSheet.create({
   container: {
@@ -54,42 +55,44 @@ export class PlayerNameScreen extends Component<Props, States> {
 
   render() {
     return (
-      <View style={styles.container}>
+      <StatusBarComponent color={GameConfig.color.endColor}>
+        <View style={styles.container}>
 
-        <View style={styles.vHeader}>
+          <View style={styles.vHeader}>
 
-          {/* Information icon */}
-          <TouchableOpacity onPress={this.onInformationClicked}>
-            <Icon style={styles.iIcon} name={'info'} />
-          </TouchableOpacity>
+            {/* Information icon */}
+            <TouchableOpacity onPress={this.onInformationClicked}>
+              <Icon style={styles.iIcon} name={'info'} />
+            </TouchableOpacity>
 
-        </View>
+          </View>
 
-        {/* Player one  */}
-        <View style={styles.vGrid}>
-          <Input
-            value={this.state.playerOneName}
-            onChangeText={this.onPlayerOneTextChanged}
-            placeholder={'Player 1'}
+          {/* Player one  */}
+          <View style={styles.vGrid}>
+            <Input
+              value={this.state.playerOneName}
+              onChangeText={this.onPlayerOneTextChanged}
+              placeholder={'Player 1'}
+            />
+          </View>
+
+          {/* Submit */}
+          <CustomButton
+            onPress={this.onStartClicked}
+            title={'START'}
           />
-        </View>
 
-        {/* Submit */}
-        <CustomButton
-          onPress={this.onStartClicked}
-          title={'START'}
-        />
+          {/* Player two */}
+          <View style={styles.vGrid}>
+            <Input
+              value={this.state.playerTwoName}
+              onChangeText={this.onPlayerTwoTextChanged}
+              placeholder={'Player 2'}
+            />
+          </View>
 
-        {/* Player two */}
-        <View style={styles.vGrid}>
-          <Input
-            value={this.state.playerTwoName}
-            onChangeText={this.onPlayerTwoTextChanged}
-            placeholder={'Player 2'}
-          />
-        </View>
-
-      </View >
+        </View >
+      </StatusBarComponent>
     );
   }
 

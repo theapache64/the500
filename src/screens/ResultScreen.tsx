@@ -5,6 +5,7 @@ import { GameResult, Result } from '../components/Result';
 import { SquareButton } from '../components/SquareButton';
 import { StyleSheet } from '../misc/StyleSheet';
 import { GameConfig } from '../GameConfig';
+import { StatusBarComponent } from '../components/StatusBarComponent';
 
 interface Props {
 
@@ -47,24 +48,26 @@ export class ResultScreen extends BaseNavigationScreenComponent<Props> {
     const playerTwoResult: GameResult = this.props.navigation.getParam('playerTwoResult');
 
     return (
-      <View style={styles.vContainer}>
+      <StatusBarComponent color={GameConfig.color.backgroundColor}>
+        <View style={styles.vContainer}>
 
-        {/* Player One status */}
-        <View style={[styles.vGrid, styles.vFlip180]}>
-          <Result name={playerOneName} result={playerOneResult} />
+          {/* Player One status */}
+          <View style={[styles.vGrid, styles.vFlip180]}>
+            <Result name={playerOneName} result={playerOneResult} />
+          </View>
+
+          {/* Start again and Exit  */}
+          <View style={[styles.vButtons]}>
+            <SquareButton onPress={this.onPlayAgainClicked} title={'PLAY AGAIN'} />
+          </View>
+
+          {/* Player two status */}
+          <View style={styles.vGrid}>
+            <Result name={playerTwoName} result={playerTwoResult} />
+          </View>
+
         </View>
-
-        {/* Start again and Exit  */}
-        <View style={[styles.vButtons]}>
-          <SquareButton onPress={this.onPlayAgainClicked} title={'PLAY AGAIN'} />
-        </View>
-
-        {/* Player two status */}
-        <View style={styles.vGrid}>
-          <Result name={playerTwoName} result={playerTwoResult} />
-        </View>
-
-      </View>
+      </StatusBarComponent>
     );
   }
 

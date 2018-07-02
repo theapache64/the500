@@ -27,7 +27,7 @@ const ROOT_STACK = createStackNavigator(
     initialRouteName: 'SplashScreen',
     initialRouteParams: {
       playerOneResult: GameResult.WINNER,
-      playerTwoResult: GameResult.LOOSER,
+      playerTwoResult: GameResult.LOSER,
 
       playerOneName: 'SAFIYA',
       playerTwoName: 'SHIFAR',

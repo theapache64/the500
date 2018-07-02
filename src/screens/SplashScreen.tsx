@@ -3,6 +3,7 @@ import { Text, View, StatusBar } from 'react-native';
 import { NavigationActions, NavigationScreenProp, StackActions } from 'react-navigation';
 import { StyleSheet } from '../misc/StyleSheet';
 import { GameConfig } from '../GameConfig';
+import { StatusBarComponent } from '../components/StatusBarComponent';
 
 const styles = StyleSheet.create({
 
@@ -28,6 +29,10 @@ interface Props {
 }
 export class SplashScreen extends Component<Props> {
 
+  getStatusBarColor(): string {
+    return GameConfig.color.endColor;
+  }
+
   componentDidMount() {
     // Moving to PlayerNameScreen
 
@@ -50,16 +55,12 @@ export class SplashScreen extends Component<Props> {
 
   render() {
     return (
-      <View style={{ flex: 1 }}>
-        <StatusBar
-          backgroundColor={GameConfig.color.endColor}
-          barStyle={'light-content'}
-        />
+      <StatusBarComponent color={GameConfig.color.pauseColor}>
         <View style={styles.container}>
           <Text style={styles.tTitle}>{GameConfig.initialCount}</Text>
           <Text style={styles.tPleaseWait}>Please wait</Text>
         </View>
-      </View>
+      </StatusBarComponent>
     );
   }
 }
