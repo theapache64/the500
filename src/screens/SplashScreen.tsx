@@ -1,9 +1,9 @@
 import { Component, default as React } from 'react';
-import { Text, View, StatusBar } from 'react-native';
+import { Text, View } from 'react-native';
 import { NavigationActions, NavigationScreenProp, StackActions } from 'react-navigation';
-import { StyleSheet } from '../misc/StyleSheet';
-import { GameConfig } from '../GameConfig';
 import { StatusBarComponent } from '../components/StatusBarComponent';
+import { GameConfig } from '../GameConfig';
+import { StyleSheet } from '../misc/StyleSheet';
 
 const styles = StyleSheet.create({
 

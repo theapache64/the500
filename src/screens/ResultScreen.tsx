@@ -3,9 +3,9 @@ import { View } from 'react-native';
 import { BaseNavigationScreenComponent } from '../components/BaseNavigationScreenComponent';
 import { GameResult, Result } from '../components/Result';
 import { SquareButton } from '../components/SquareButton';
-import { StyleSheet } from '../misc/StyleSheet';
-import { GameConfig } from '../GameConfig';
 import { StatusBarComponent } from '../components/StatusBarComponent';
+import { GameConfig } from '../GameConfig';
+import { StyleSheet } from '../misc/StyleSheet';
 
 interface Props {
 

@@ -1,10 +1,10 @@
-import { default as React, Component } from 'react';
-import { View, Text, ScrollView, TouchableOpacity } from 'react-native';
-import { StyleSheet } from '../misc/StyleSheet';
-import { GameConfig } from '../GameConfig';
+import { default as React } from 'react';
+import { ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import { default as Icon } from 'react-native-vector-icons/SimpleLineIcons';
 import { BaseNavigationScreenComponent } from '../components/BaseNavigationScreenComponent';
 import { StatusBarComponent } from '../components/StatusBarComponent';
+import { GameConfig } from '../GameConfig';
+import { StyleSheet } from '../misc/StyleSheet';
 
 interface Props {
 

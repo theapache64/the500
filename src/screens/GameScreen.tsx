@@ -7,13 +7,13 @@
  */
 
 import { Component, default as React } from 'react';
-import { StyleSheet, Vibration, View, StatusBar } from 'react-native';
+import { StatusBar, StyleSheet, Vibration, View } from 'react-native';
 import { NavigationScreenProp } from 'react-navigation';
 import { Counter } from '../components/Counter';
 import { CounterControl, CounterControlType } from '../components/CounterControl';
+import { GameResult } from '../components/Result';
 import { GameConfig } from '../GameConfig';
 import { RandomNumber } from '../utils/RandomNumber';
-import { GameResult } from '../components/Result';
 
 export enum GameStates {
   'start', 'end', 'pause',

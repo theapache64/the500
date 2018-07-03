@@ -1,7 +1,7 @@
 import { Component, default as React } from 'react';
 import { Text, TouchableHighlight, TouchableOpacityProps, View } from 'react-native';
-import { StyleSheet } from '../misc/StyleSheet';
 import { GameConfig } from '../GameConfig';
+import { StyleSheet } from '../misc/StyleSheet';
 
 export enum CounterControlType {
   'add', 'substract',

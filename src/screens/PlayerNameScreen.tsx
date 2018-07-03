@@ -1,12 +1,12 @@
 import { Component, default as React } from 'react';
-import { Alert, View, TouchableOpacity } from 'react-native';
+import { Alert, TouchableOpacity, View } from 'react-native';
+import { default as Icon } from 'react-native-vector-icons/SimpleLineIcons';
 import { NavigationScreenProp } from 'react-navigation';
 import { CustomButton } from '../components/CustomButton';
 import { Input } from '../components/Input';
-import { StyleSheet } from '../misc/StyleSheet';
-import { GameConfig } from '../GameConfig';
-import { default as Icon } from 'react-native-vector-icons/SimpleLineIcons';
 import { StatusBarComponent } from '../components/StatusBarComponent';
+import { GameConfig } from '../GameConfig';
+import { StyleSheet } from '../misc/StyleSheet';
 
 const styles = StyleSheet.create({
   container: {

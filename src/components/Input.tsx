@@ -1,4 +1,4 @@
-import { default as React, Component } from 'react';
+import { Component, default as React } from 'react';
 import { TextInput, TextInputProps, View } from 'react-native';
 import { StyleSheet } from '../misc/StyleSheet';
 
