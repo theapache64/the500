@@ -56,7 +56,7 @@ export class InformationScreen extends BaseNavigationScreenComponent<Props, Stat
     `;
 
     return (
-      <StatusBarComponent color={GameConfig.color.backgroundColor}>
+      <StatusBarComponent color={GameConfig.color.pauseColor}>
         <View style={styles.vContainer}>
 
           {/* Back button */}

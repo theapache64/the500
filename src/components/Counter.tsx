@@ -9,9 +9,7 @@ interface Props extends TextProps {
 
 const styles = StyleSheet.create({
   tCount: {
-    flex: 1,
     textAlign: 'center',
-    textAlignVertical: 'center',
     color: '#FFF',
     fontSize: 50,
   },

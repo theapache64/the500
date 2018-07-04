@@ -48,7 +48,7 @@ export class ResultScreen extends BaseNavigationScreenComponent<Props> {
     const playerTwoResult: GameResult = this.props.navigation.getParam('playerTwoResult');
 
     return (
-      <StatusBarComponent color={GameConfig.color.backgroundColor}>
+      <StatusBarComponent color={GameConfig.color.startColor}>
         <View style={styles.vContainer}>
 
           {/* Player One status */}
