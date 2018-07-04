@@ -1,5 +1,5 @@
 import { Component, default as React } from 'react';
-import { StatusBar, View } from 'react-native';
+import { StatusBar, View, SafeAreaView } from 'react-native';
 import { StyleSheet } from '../misc/StyleSheet';
 
 const styles = StyleSheet.create({
@@ -15,14 +15,9 @@ export class StatusBarComponent extends Component<Props>{
 
   render() {
     return (
-      <View style={styles.vContainer}>
-        <StatusBar
-          backgroundColor={this.props.color}
-          barStyle={'light-content'}
-        />
-
+      <SafeAreaView style={{flex: 1, backgroundColor: this.props.color}}>
         {this.props.children}
-      </View>
+      </SafeAreaView>
     );
   }
 }
