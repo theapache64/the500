@@ -8,4 +8,4 @@ A simple game, built with react-native
 
 ## Back story
 
-I've been running after RN basics, and had to try `state` changes. I created a `increment`/`decrement` program, and eventually it turned into a game. :/ 
+I've been running after RN basics, had to try `state` changes. I created a `increment`/`decrement` program, eventually it turned into a game. :/ 
