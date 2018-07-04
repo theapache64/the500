@@ -9,3 +9,6 @@ A simple game, built with react-native
 ## Back story
 
 I've been running after RN basics, had to try `state` changes. I created a `increment`/`decrement` program, eventually it turned into a game. :/ 
+
+
+<a href="https://play.google.com/store/apps/details?id=com.the500"><img alt="Get it on Google Play" src="https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png" width="200px"/></a>
