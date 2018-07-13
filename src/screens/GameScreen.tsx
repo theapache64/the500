@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
 
 export class GameScreen extends Component<Props, States> {
 
-  stateChangeTimer = 0;
+  stateChangeTimer : NodeJS.Timer = null;
 
   constructor(props: Props) {
     super(props);
@@ -190,9 +190,6 @@ export class GameScreen extends Component<Props, States> {
 
           if (count >= GameConfig.upperCount || count <= GameConfig.lowerCount) {
 
-            const playerOneName = this.props.navigation.getParam('playerOneName');
-            const playerTwoName = this.props.navigation.getParam('playerTwoName');
-
             // Limit reached
             this.setState({
 
@@ -222,7 +219,7 @@ export class GameScreen extends Component<Props, States> {
     });
   }
 
-  private onTooMuchPressed = (type: CounterControlType) => {
+  private onTooMuchPressed = () => {
     // The pressed player will fail here
   }
 }

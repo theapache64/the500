@@ -1,4 +1,5 @@
 {
-  "name": "the500",
-  "displayName": "the500"
+  "expo": {
+    "sdkVersion": "27.0.0"
+  }
 }

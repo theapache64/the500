@@ -7,13 +7,12 @@
  */
 import { default as React, Component } from 'react';
 import { createStackNavigator } from 'react-navigation';
-import { SplashScreen } from './src/screens/SplashScreen';
-import { PlayerNameScreen } from './src/screens/PlayerNameScreen';
-import { GameScreen } from './src/screens/GameScreen';
-import { ResultScreen } from './src/screens/ResultScreen';
-import { GameResult } from './src/components/Result';
-import { InformationScreen } from './src/screens/InformationScreen';
-import { StatusBar, View } from 'react-native';
+import { SplashScreen } from './screens/SplashScreen';
+import { PlayerNameScreen } from './screens/PlayerNameScreen';
+import { GameScreen } from './screens/GameScreen';
+import { ResultScreen } from './screens/ResultScreen';
+import { GameResult } from './components/Result';
+import { InformationScreen } from './screens/InformationScreen';
 
 const ROOT_STACK = createStackNavigator(
   {

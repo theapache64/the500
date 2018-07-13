@@ -1,6 +1,6 @@
 import { default as React } from 'react';
 import { ScrollView, Text, TouchableOpacity, View } from 'react-native';
-import { default as Icon } from 'react-native-vector-icons/SimpleLineIcons';
+import { SimpleLineIcons } from '@expo/vector-icons';
 import { BaseNavigationScreenComponent } from '../components/BaseNavigationScreenComponent';
 import { StatusBarComponent } from '../components/StatusBarComponent';
 import { GameConfig } from '../GameConfig';
@@ -61,7 +61,7 @@ export class InformationScreen extends BaseNavigationScreenComponent<Props, Stat
 
           {/* Back button */}
           <TouchableOpacity onPress={this.onBackButtonPressed}>
-            <Icon style={styles.iBackIcon} name={'arrow-left-circle'} />
+            <SimpleLineIcons style={styles.iBackIcon} name={'arrow-left-circle'} />
           </TouchableOpacity>
 
           {/* Instructions */}

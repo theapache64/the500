@@ -42,9 +42,9 @@ const styles = StyleSheet.create({
 });
 export class CounterControl extends Component<Props>{
 
-  timer = 0;
+  timer: NodeJS.Timer = null;
   isAlreadyPressed = false;
-  tooMuchTimer = 0;
+  tooMuchTimer: NodeJS.Timer = null;
 
   render() {
 
@@ -66,7 +66,7 @@ export class CounterControl extends Component<Props>{
           </Text>
 
           <Text style={[styles.tPlayerName, this.getFlip()]}>
-            {`${this.props.playerName} [${symbol}${this.getRemaningCountNeeded()}]`}
+            {`${this.props.playerName} [${symbol}${this.getRemainingCountNeeded()}]`}
           </Text>
 
         </View>
@@ -75,7 +75,7 @@ export class CounterControl extends Component<Props>{
     );
   }
 
-  getRemaningCountNeeded(): number {
+  getRemainingCountNeeded(): number {
 
     if (this.props.type === CounterControlType.add) {
       return GameConfig.upperCount - this.props.count;

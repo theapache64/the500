@@ -1,6 +1,6 @@
 import { Component, default as React } from 'react';
-import { Alert, TouchableOpacity, View } from 'react-native';
-import { default as Icon } from 'react-native-vector-icons/SimpleLineIcons';
+import { Alert, TouchableOpacity, View, KeyboardAvoidingView } from 'react-native';
+import { SimpleLineIcons } from '@expo/vector-icons';
 import { NavigationScreenProp } from 'react-navigation';
 import { CustomButton } from '../components/CustomButton';
 import { Input } from '../components/Input';
@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
     alignItems: 'center',
     width: '100%',
-    height: 50,
+    height: 100,
   },
 
   iIcon: {
@@ -31,6 +31,10 @@ const styles = StyleSheet.create({
     fontSize: 20,
     padding: 10,
   },
+
+  toIcon: {
+   
+  }
 });
 
 interface Props {
@@ -55,44 +59,49 @@ export class PlayerNameScreen extends Component<Props, States> {
 
   render() {
     return (
-      <StatusBarComponent color={GameConfig.color.endColor}>
-        <View style={styles.container}>
 
-          <View style={styles.vHeader}>
+      <StatusBarComponent color={'red'}>
+        <KeyboardAvoidingView style={{ flex: 1 }} behavior={'padding'}>
 
-            {/* Information icon */}
-            <TouchableOpacity onPress={this.onInformationClicked}>
-              <Icon style={styles.iIcon} name={'info'} />
-            </TouchableOpacity>
+          <View style={styles.container}>
 
-          </View>
+            <View style={styles.vHeader}>
 
-          {/* Player one  */}
-          <View style={styles.vGrid}>
-            <Input
-              value={this.state.playerOneName}
-              onChangeText={this.onPlayerOneTextChanged}
-              placeholder={'Player 1'}
+              {/* Information icon */}
+              <TouchableOpacity style={styles.toIcon} onPress={this.onInformationClicked}>
+                <SimpleLineIcons style={styles.iIcon} name={'info'} />
+              </TouchableOpacity>
+
+            </View>
+
+            {/* Player one  */}
+            <View style={styles.vGrid}>
+              <Input
+                value={this.state.playerOneName}
+                onChangeText={this.onPlayerOneTextChanged}
+                placeholder={'Player 1'}
+              />
+            </View>
+
+            {/* Submit */}
+            <CustomButton
+              onPress={this.onStartClicked}
+              title={'START'}
             />
-          </View>
 
-          {/* Submit */}
-          <CustomButton
-            onPress={this.onStartClicked}
-            title={'START'}
-          />
+            {/* Player two */}
+            <View style={styles.vGrid}>
+              <Input
+                value={this.state.playerTwoName}
+                onChangeText={this.onPlayerTwoTextChanged}
+                placeholder={'Player 2'}
+              />
+            </View>
 
-          {/* Player two */}
-          <View style={styles.vGrid}>
-            <Input
-              value={this.state.playerTwoName}
-              onChangeText={this.onPlayerTwoTextChanged}
-              placeholder={'Player 2'}
-            />
-          </View>
+          </View >
 
-        </View >
-      </StatusBarComponent>
+        </KeyboardAvoidingView>
+      </StatusBarComponent >
     );
   }
 
