@@ -70,9 +70,7 @@ export class GameScreen extends Component<Props, States> {
       : RandomNumber.getBetween(GameConfig.minTimeout, GameConfig.maxTimeout);
 
     this.stateChangeTimer = setTimeout(
-
       () => {
-
         // Recursion
         let newState!: GameStates;
         let scoreFlip: number;
@@ -111,7 +109,7 @@ export class GameScreen extends Component<Props, States> {
 
 
                 // A delay between 0.5 to 1.5 secs
-                const pressDelay = RandomNumber.getBetween(500, 1200);
+                const pressDelay = RandomNumber.getBetween(70, 500);
 
                 console.log('Press delay is ' + pressDelay);
 
