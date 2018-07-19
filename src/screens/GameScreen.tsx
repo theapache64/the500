@@ -7,7 +7,7 @@
  */
 
 import { Component, default as React } from 'react';
-import { StatusBar, StyleSheet, Vibration, View } from 'react-native';
+import { StatusBar, StyleSheet, Vibration, View, TouchableHighlight } from 'react-native';
 import { NavigationScreenProp } from 'react-navigation';
 import { Counter } from '../components/Counter';
 import { CounterControl, CounterControlType } from '../components/CounterControl';
@@ -33,6 +33,7 @@ interface States {
   scoreFlip: number;
   playerOneResult: GameResult;
   playerTwoResult: GameResult;
+  isComputerPressing: boolean;
 }
 
 const styles = StyleSheet.create({
@@ -45,6 +46,7 @@ export class GameScreen extends Component<Props, States> {
 
   stateChangeTimer = 0;
   gameMode: GameMode = null;
+  isComputerPressing: boolean = false;
 
   constructor(props: Props) {
     super(props);
@@ -56,11 +58,16 @@ export class GameScreen extends Component<Props, States> {
       playerOneResult: null,
       playerTwoResult: null,
       count: GameConfig.initialCount,
-      gameState: GameStates.start,
+      gameState: GameStates.pause,
+      isComputerPressing: false,
     };
   }
 
   startRandomGameStateChanger(timeout?: number): any {
+
+    const stateChangeTimeout = timeout
+      ? timeout
+      : RandomNumber.getBetween(GameConfig.minTimeout, GameConfig.maxTimeout);
 
     this.stateChangeTimer = setTimeout(
 
@@ -82,6 +89,7 @@ export class GameScreen extends Component<Props, States> {
 
           case GameStates.end:
             scoreFlip = 90;
+
             newState = GameStates.pause;
             break;
 
@@ -95,6 +103,57 @@ export class GameScreen extends Component<Props, States> {
             gameState: newState,
           }),
           () => {
+            if (this.gameMode === GameMode.single && !this.isYouPressing) {
+              if (this.state.gameState === GameStates.start) {
+                console.log('GREEEEEEEEEEEN for ' + stateChangeTimeout);
+
+                // A delay between 0.5 to 1.5 secs
+                const pressDelay = RandomNumber.getBetween(250, 700);
+
+                console.log('Press delay is ' + pressDelay);
+
+                // Press delay
+                setTimeout(
+                  () => {
+
+                    const pressingFor = RandomNumber
+                      .getBetween(GameConfig.minTimeout, GameConfig.maxTimeout);
+
+                    console.log('Pressing for ' + pressingFor);
+
+                    this.setState({ isComputerPressing: true }, () => {
+
+                      // Delay finished
+                      const interValKey = setInterval(
+                        () => {
+                          if (!this.state.playerOneResult) {
+                            // Game not finished
+                            this.onControlPressed(CounterControlType.subtract, true);
+                          }
+                        },
+                        // slowness
+                        50
+                      );
+
+                      // Press canceller
+                      setTimeout(
+                        () => {
+                          console.log('Removed finger');
+                          this.setState({ isComputerPressing: false }, () => {
+                            clearInterval(interValKey);
+                          });
+                        },
+                        pressingFor
+                      );
+
+                    });
+
+                  },
+                  pressDelay
+                );
+
+              }
+            }
             this.startRandomGameStateChanger(
               // If it's end, watchfor tooMuchHold
               this.state.gameState === GameStates.end && GameConfig.tooMuchHoldTimeout
@@ -103,7 +162,7 @@ export class GameScreen extends Component<Props, States> {
         );
 
       },
-      timeout ? timeout : RandomNumber.getBetween(GameConfig.minTimeout, GameConfig.maxTimeout)
+      stateChangeTimeout
     );
   }
 
@@ -147,6 +206,13 @@ export class GameScreen extends Component<Props, States> {
     const playerOneName = this.props.navigation.getParam('playerOneName');
     const playerTwoName = this.props.navigation.getParam('playerTwoName');
 
+    const isCompPress = (this.gameMode === GameMode.single && this.state.isComputerPressing);
+    const dynamicBg = {
+      backgroundColor: isCompPress
+        ? GameConfig.color.startColorDark
+        : 'transparent'
+    };
+
     return (
       <View style={{ flex: 1 }}>
         <StatusBar
@@ -158,13 +224,16 @@ export class GameScreen extends Component<Props, States> {
             count={this.state.count}
             playerName={playerOneName}
             flip={180}
+            style={dynamicBg}
             onTooMuchPressedIn={this.onTooMuchPressed}
             onControlPressed={this.onControlPressed}
-            type={CounterControlType.substract}
+            type={CounterControlType.subtract}
           />
           <Counter flip={this.state.scoreFlip} count={this.state.count} />
           <CounterControl
+            onPressReleased={this.onYouReleasedPress}
             count={this.state.count}
+            disabled={this.state.isComputerPressing}
             playerName={playerTwoName}
             onTooMuchPressedIn={this.onTooMuchPressed}
             onControlPressed={this.onControlPressed}
@@ -174,7 +243,26 @@ export class GameScreen extends Component<Props, States> {
       </View>
     );
   }
+
+  onYouReleasedPress = () => {
+    console.log('Out');
+
+    this.isYouPressing = false;
+  }
+
+  isYouPressing: boolean = false;
+
   private onControlPressed = (type: CounterControlType, isHolding: boolean) => {
+
+    if (this.isYouPressing && type === CounterControlType.subtract) {
+      return;
+    }
+
+    if (this.state.isComputerPressing && type === CounterControlType.add) {
+      return;
+    }
+
+    this.isYouPressing = type === CounterControlType.add;
 
     const { gameState } = this.state;
 

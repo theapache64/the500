@@ -4,7 +4,7 @@ import { GameConfig } from '../GameConfig';
 import { StyleSheet } from '../misc/StyleSheet';
 
 export enum CounterControlType {
-  'add', 'substract',
+  'add', 'subtract',
 }
 
 interface Props extends TouchableOpacityProps {
@@ -12,6 +12,7 @@ interface Props extends TouchableOpacityProps {
   count: number;
   onControlPressed: (type: CounterControlType, isHolding: boolean) => void;
   onTooMuchPressedIn: (type: CounterControlType) => void;
+  onPressReleased?: () => void;
   playerName: string;
   flip?: number;
 }
@@ -124,6 +125,10 @@ export class CounterControl extends Component<Props>{
 
     clearInterval(this.timer);
     clearTimeout(this.tooMuchTimer);
+
+    if (this.props.onPressReleased) {
+      this.props.onPressReleased();
+    }
   }
 
   componentWillUnmount() {
