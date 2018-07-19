@@ -106,10 +106,7 @@ export class GameScreen extends Component<Props, States> {
               if (this.state.gameState === GameStates.start) {
                 console.log('GREEEEEEEEEEEN for ' + stateChangeTimeout);
 
-
-
-                // A delay between 0.5 to 1.5 secs
-                const pressDelay = RandomNumber.getBetween(70, 500);
+                const pressDelay =  RandomNumber.getBetween(550, 650);
 
                 console.log('Press delay is ' + pressDelay);
 
@@ -126,31 +123,36 @@ export class GameScreen extends Component<Props, States> {
 
                     console.log('Pressing for ' + pressingFor);
 
-                    this.setState({ isComputerPressing: true }, () => {
+                    if (!this.state.playerOneResult) {
+                      this.setState({ isComputerPressing: true }, () => {
 
-                      // Delay finished
-                      const interValKey = setInterval(
-                        () => {
-                          if (!this.state.playerOneResult) {
-                            // Game not finished
-                            this.onControlPressed(CounterControlType.subtract, true);
-                          }
-                        },
-                        // slowness
-                        50
-                      );
+                        // Delay finished
+                        const interValKey = setInterval(
+                          () => {
+                            if (!this.state.playerOneResult) {
+                              // Game not finished
+                              this.onControlPressed(CounterControlType.subtract, true);
+                            }
+                          },
+                          // slowness
+                          50
+                        );
 
-                      // Press canceller
-                      setTimeout(
-                        () => {
-                          console.log('Removed finger');
-                          this.setState({ isComputerPressing: false }, () => {
-                            clearInterval(interValKey);
-                          });
-                        },
-                        pressingFor
-                      );
-                    });
+                        // Press canceller
+                        setTimeout(
+                          () => {
+                            console.log('Removed finger');
+                            if (!this.state.playerOneResult) {
+                              this.setState({ isComputerPressing: false }, () => {
+                                clearInterval(interValKey);
+                              });
+                            }
+                          },
+                          pressingFor
+                        );
+                      });
+                    }
+
                   },
                   pressDelay
                 );
