@@ -5,15 +5,14 @@
  * Generated with the TypeScript template
  * https://github.com/emin93/react-native-template-typescript
  */
-import { default as React, Component } from 'react';
+import { Component, default as React } from 'react';
 import { createStackNavigator } from 'react-navigation';
-import { SplashScreen } from './src/screens/SplashScreen';
-import { PlayerNameScreen } from './src/screens/PlayerNameScreen';
-import { GameScreen } from './src/screens/GameScreen';
-import { ResultScreen } from './src/screens/ResultScreen';
 import { GameResult } from './src/components/Result';
+import { GameScreen } from './src/screens/GameScreen';
 import { InformationScreen } from './src/screens/InformationScreen';
-import { StatusBar, View } from 'react-native';
+import { PlayerNameScreen } from './src/screens/PlayerNameScreen';
+import { ResultScreen } from './src/screens/ResultScreen';
+import { SplashScreen } from './src/screens/SplashScreen';
 
 const ROOT_STACK = createStackNavigator(
   {
