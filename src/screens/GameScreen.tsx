@@ -19,6 +19,10 @@ export enum GameStates {
   'start', 'end', 'pause',
 }
 
+export enum GameMode {
+  'single', 'dual'
+}
+
 interface Props {
   navigation: NavigationScreenProp<Props>;
 }
@@ -40,9 +44,12 @@ const styles = StyleSheet.create({
 export class GameScreen extends Component<Props, States> {
 
   stateChangeTimer = 0;
+  gameMode: GameMode = null;
 
   constructor(props: Props) {
     super(props);
+
+    this.gameMode = props.navigation.getParam('gameMode');
 
     this.state = {
       scoreFlip: 90,

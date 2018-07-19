@@ -7,6 +7,7 @@ import { Input } from '../components/Input';
 import { StatusBarComponent } from '../components/StatusBarComponent';
 import { GameConfig } from '../GameConfig';
 import { StyleSheet } from '../misc/StyleSheet';
+import { GameMode } from './GameScreen';
 
 const styles = StyleSheet.create({
   container: {
@@ -20,7 +21,7 @@ const styles = StyleSheet.create({
 
   vHeader: {
     flexDirection: 'row',
-    justifyContent: 'flex-end',
+    justifyContent: 'space-between',
     alignItems: 'center',
     width: '100%',
     height: 50,
@@ -28,7 +29,7 @@ const styles = StyleSheet.create({
 
   iIcon: {
     color: '#FFF',
-    fontSize: 20,
+    fontSize: 25,
     padding: 10,
   },
 });
@@ -59,6 +60,11 @@ export class PlayerNameScreen extends Component<Props, States> {
         <View style={styles.container}>
 
           <View style={styles.vHeader}>
+
+            {/* Back icon icon */}
+            <TouchableOpacity onPress={this.onBackButtonPressed}>
+              <Icon style={styles.iIcon} name={'arrow-left-circle'} />
+            </TouchableOpacity>
 
             {/* Information icon */}
             <TouchableOpacity onPress={this.onInformationClicked}>
@@ -112,8 +118,13 @@ export class PlayerNameScreen extends Component<Props, States> {
     this.props.navigation.navigate('GameScreen', {
       playerOneName,
       playerTwoName,
+      gameMode: GameMode.dual,
     });
 
+  }
+
+  onBackButtonPressed = () => {
+    this.props.navigation.goBack();
   }
 
   onPlayerOneTextChanged = (name: string) => {

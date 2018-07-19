@@ -42,7 +42,7 @@ export class SplashScreen extends Component<Props> {
           index: 0,
           actions: [
             NavigationActions.navigate({
-              routeName: 'PlayerNameScreen',
+              routeName: 'GameModeScreen',
             }),
           ],
         });
