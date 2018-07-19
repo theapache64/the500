@@ -103,18 +103,25 @@ export class GameScreen extends Component<Props, States> {
             gameState: newState,
           }),
           () => {
+
             if (this.gameMode === GameMode.single && !this.isYouPressing) {
               if (this.state.gameState === GameStates.start) {
                 console.log('GREEEEEEEEEEEN for ' + stateChangeTimeout);
 
+
+
                 // A delay between 0.5 to 1.5 secs
-                const pressDelay = RandomNumber.getBetween(250, 700);
+                const pressDelay = RandomNumber.getBetween(500, 1200);
 
                 console.log('Press delay is ' + pressDelay);
 
                 // Press delay
                 setTimeout(
                   () => {
+
+                    if (this.isYouPressing) {
+                      return;
+                    }
 
                     const pressingFor = RandomNumber
                       .getBetween(GameConfig.minTimeout, GameConfig.maxTimeout);
@@ -145,14 +152,14 @@ export class GameScreen extends Component<Props, States> {
                         },
                         pressingFor
                       );
-
                     });
-
                   },
                   pressDelay
                 );
 
               }
+            } else {
+              this.setState({ isComputerPressing: false });
             }
             this.startRandomGameStateChanger(
               // If it's end, watchfor tooMuchHold
@@ -206,7 +213,8 @@ export class GameScreen extends Component<Props, States> {
     const playerOneName = this.props.navigation.getParam('playerOneName');
     const playerTwoName = this.props.navigation.getParam('playerTwoName');
 
-    const isCompPress = (this.gameMode === GameMode.single && this.state.isComputerPressing);
+    const isCompPress = (this.gameMode === GameMode.single && !this.isYouPressing
+      && this.state.isComputerPressing);
     const dynamicBg = {
       backgroundColor: isCompPress
         ? GameConfig.color.startColorDark
