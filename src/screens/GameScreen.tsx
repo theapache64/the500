@@ -104,11 +104,9 @@ export class GameScreen extends Component<Props, States> {
 
             if (this.gameMode === GameMode.single && !this.isYouPressing) {
               if (this.state.gameState === GameStates.start) {
-                console.log('GREEEEEEEEEEEN for ' + stateChangeTimeout);
-
-                const pressDelay =  RandomNumber.getBetween(550, 650);
-
-                console.log('Press delay is ' + pressDelay);
+                
+                const pressDelay =  RandomNumber
+                .getBetween(GameConfig.computer.minPressDelay, GameConfig.computer.maxPressDelay);
 
                 // Press delay
                 setTimeout(
@@ -119,9 +117,7 @@ export class GameScreen extends Component<Props, States> {
                     }
 
                     const pressingFor = RandomNumber
-                      .getBetween(GameConfig.minTimeout, GameConfig.maxTimeout);
-
-                    console.log('Pressing for ' + pressingFor);
+                      .getBetween(GameConfig.minTimeout, stateChangeTimeout);
 
                     if (!this.state.playerOneResult) {
                       this.setState({ isComputerPressing: true }, () => {
@@ -135,13 +131,13 @@ export class GameScreen extends Component<Props, States> {
                             }
                           },
                           // slowness
-                          50
+                          GameConfig.computer.slowness
                         );
 
                         // Press canceller
                         setTimeout(
                           () => {
-                            console.log('Removed finger');
+                            
                             if (!this.state.playerOneResult) {
                               this.setState({ isComputerPressing: false }, () => {
                                 clearInterval(interValKey);
@@ -162,7 +158,7 @@ export class GameScreen extends Component<Props, States> {
               this.setState({ isComputerPressing: false });
             }
             this.startRandomGameStateChanger(
-              // If it's end, watchfor tooMuchHold
+              // If it's end, watch for tooMuchHold
               this.state.gameState === GameStates.end && GameConfig.tooMuchHoldTimeout
             );
           }
@@ -253,8 +249,7 @@ export class GameScreen extends Component<Props, States> {
   }
 
   onYouReleasedPress = () => {
-    console.log('Out');
-
+    
     this.isYouPressing = false;
   }
 

@@ -38,5 +38,10 @@ export class GameConfig {
   static initialCount: number = 500;
   static upperCount: number = 600;
   static lowerCount: number = 400;
+  static readonly computer = class {
+    static readonly minPressDelay = 550;
+    static readonly maxPressDelay = 650;
+    static readonly slowness = 50;
+  };
 
 }

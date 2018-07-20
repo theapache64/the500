@@ -66,11 +66,6 @@ export class PlayerNameScreen extends Component<Props, States> {
               <Icon style={styles.iIcon} name={'arrow-left-circle'} />
             </TouchableOpacity>
 
-            {/* Information icon */}
-            <TouchableOpacity onPress={this.onInformationClicked}>
-              <Icon style={styles.iIcon} name={'info'} />
-            </TouchableOpacity>
-
           </View>
 
           {/* Player one  */}
@@ -102,9 +97,6 @@ export class PlayerNameScreen extends Component<Props, States> {
     );
   }
 
-  onInformationClicked = () => {
-    this.props.navigation.navigate('InformationScreen');
-  }
 
   onStartClicked = () => {
     const { playerOneName, playerTwoName } = this.state;
